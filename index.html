@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Todo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <h1 class="app-title">Todo List</h1>
+      <p class="app-sub-title">할 일이 너무 많아...🤣</p>
+
+      <!-- 주간 뷰: 연/월 + 달력 버튼 + 이전/다음 주 + 요일 셀 -->
+      <div class="week-nav">
+        <!-- 연/월 범위 레이블과 달력 버튼을 한 행에 배치 -->
+        <div class="week-nav-header">
+          <span id="week-range" class="week-range"></span>
+          <button id="calendar-btn" class="calendar-btn" title="달력으로 날짜 선택">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1.5" y="3" width="13" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="1.5" y1="6.5" x2="14.5" y2="6.5" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="5" y1="1.5" x2="5" y2="4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="11" y1="1.5" x2="11" y2="4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="week-nav-row">
+          <button id="prev-week-btn" class="week-nav-btn">&#8249;</button>
+          <div id="week-strip" class="week-strip"></div>
+          <button id="next-week-btn" class="week-nav-btn">&#8250;</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 달력 팝업: 달력 버튼 클릭 시 표시되는 모달 형태 -->
+    <div id="calendar-backdrop" class="calendar-backdrop hidden"></div>
+    <div id="calendar-popup" class="calendar-popup hidden"></div>
+
+    <!-- 할 일 입력 영역 -->
+    <section class="input-section">
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="todo-input"
+          class="todo-input"
+          placeholder="할 일을 입력하세요..."
+        />
+        <button id="add-btn" class="add-btn">추가</button>
+      </div>
+      <!-- 입력값이 비어있을 때 표시되는 안내 메시지 -->
+      <p id="error-message" class="error-message hidden">할 일을 입력해 주세요.</p>
+    </section>
+
+    <!-- 상태별 필터 탭 -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">전체</button>
+      <button class="filter-tab" data-filter="active">진행 중</button>
+      <button class="filter-tab" data-filter="completed">완료</button>
+    </div>
+
+    <!-- 할 일 목록 -->
+    <section class="todo-section">
+      <ul id="todo-list" class="todo-list"></ul>
+      <!-- 해당 날짜·필터에 항목이 없을 때 표시되는 안내 문구 -->
+      <p id="empty-message" class="empty-message hidden"></p>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
