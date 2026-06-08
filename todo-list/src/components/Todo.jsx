@@ -64,6 +64,17 @@ export default function Todo() {
                 {errorMessage && <p className="text-red-500 text-center text-1">{errorMessage}</p>}
             </div>
 
+            <div className="flex flex-row justify-envenly items-center mb-2">
+                <div className="bg-[#fff] border-1 border-solid text-center w-[130px] runded">
+                    전체
+                </div>
+                <div className="bg-[#fff] border-1 border-solid text-center w-[130px] runded">
+                    완료
+                </div>
+                <div className="bg-[#fff] border-1 border-solid text-center w-[130px] runded">
+                    진행중
+                </div>
+            </div>
            
 
             {/* 항목 리스트 */}
