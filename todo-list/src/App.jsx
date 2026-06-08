@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Header from './components/Header'
-import WeekView from './components/WeekView'
 import Todo from './components/Todo'
 
 function App() {
