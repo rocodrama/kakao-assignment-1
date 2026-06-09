@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 export default function WeekView({displayDate, setDisplayDate}) {
-    
 
     const handlePrevClick = () => {
         const prevDate = new Date(displayDate);

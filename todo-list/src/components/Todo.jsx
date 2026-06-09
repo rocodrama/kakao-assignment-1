@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 export default function Todo({displayDate, setDisplayDate}) {
     const [todoInput, setTodoInput] = useState('');
@@ -33,12 +33,14 @@ export default function Todo({displayDate, setDisplayDate}) {
         }
 
         setTodos([...todos, newTodo]);
+        localStorage.setItem('todos', JSON.stringify(todos));
         setTodoInput('');
         setKeyNum(keyNum + 1);
     }
 
     const handleCompleteTodo = (id) => {
         setTodos(todos.map(todo => todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo));
+        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
     const handleStartEditTodo = (id) => {
@@ -50,10 +52,12 @@ export default function Todo({displayDate, setDisplayDate}) {
         setTodos(todos.map(todo => todo.id === id ? { ...todo, text: editText } : todo));
         setEditId(null);
         setEditText('');
+        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
     const handleDeleteTodo = (id) => {
         setTodos(todos.filter(todo => todo.id !== id));
+        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
     const handleFilterTods = (filter) => {
@@ -66,6 +70,13 @@ export default function Todo({displayDate, setDisplayDate}) {
         }
     }
 
+    useEffect(() => {
+        const storedTodos = JSON.parse(localStorage.getItem('todos'));
+        if (storedTodos) {
+            setTodos(storedTodos);
+            setKeyNum(storedTodos.length);
+        }
+    }, []);
         
     return (
         <div className="w-[600px]">
