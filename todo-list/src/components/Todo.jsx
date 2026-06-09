@@ -2,7 +2,10 @@ import {useState, useEffect} from 'react';
 
 export default function Todo({displayDate, setDisplayDate}) {
     const [todoInput, setTodoInput] = useState('');
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState(() => {
+        const storedTodos = localStorage.getItem("todos");
+        return storedTodos ? JSON.parse(storedTodos) : [];
+    });
     const [isDisabled, setIsDisabled] = useState(true);
     const [keyNum, setKeyNum] = useState(0);
     const [errorMessage, setErrorMessage] = useState('');
@@ -33,14 +36,12 @@ export default function Todo({displayDate, setDisplayDate}) {
         }
 
         setTodos([...todos, newTodo]);
-        localStorage.setItem('todos', JSON.stringify(todos));
         setTodoInput('');
         setKeyNum(keyNum + 1);
     }
 
     const handleCompleteTodo = (id) => {
         setTodos(todos.map(todo => todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo));
-        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
     const handleStartEditTodo = (id) => {
@@ -52,12 +53,10 @@ export default function Todo({displayDate, setDisplayDate}) {
         setTodos(todos.map(todo => todo.id === id ? { ...todo, text: editText } : todo));
         setEditId(null);
         setEditText('');
-        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
     const handleDeleteTodo = (id) => {
         setTodos(todos.filter(todo => todo.id !== id));
-        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
     const handleFilterTods = (filter) => {
@@ -71,12 +70,8 @@ export default function Todo({displayDate, setDisplayDate}) {
     }
 
     useEffect(() => {
-        const storedTodos = JSON.parse(localStorage.getItem('todos'));
-        if (storedTodos) {
-            setTodos(storedTodos);
-            setKeyNum(storedTodos.length);
-        }
-    }, []);
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos]);
         
     return (
         <div className="w-[600px]">
@@ -119,7 +114,7 @@ export default function Todo({displayDate, setDisplayDate}) {
                 <ul className="flex flex-col justify-center items-center">
                     {handleFilterTods(filter).filter((todo) => todo.date === displayDate.toLocaleDateString()).map((todo) => (
                         <li key={todo.id} className="bg-[#fff] border-1 border-solid border-[#497CBF] w-full px-4 py-2 rounded mb-2 flex flex-row justify-between items-center gap-[8px]">
-                            <input type="checkbox" onChange={() => handleCompleteTodo(todo.id)} />
+                            <input type="checkbox" checked={todo.isCompleted} onChange={() => handleCompleteTodo(todo.id)}  />
                             
                             { editId === todo.id ?
                                 <input className="bg-[#fff]  border-2 border-solid border-[#8FAFD9] w-[400px] px-4 py-2 rounded focus:outline-0 focus:border-[#497CBF] "
