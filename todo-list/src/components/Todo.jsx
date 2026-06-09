@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-export default function Todo() {
+export default function Todo({displayDate, setDisplayDate}) {
     const [todoInput, setTodoInput] = useState('');
     const [todos, setTodos] = useState([]);
     const [isDisabled, setIsDisabled] = useState(true);
@@ -29,6 +29,7 @@ export default function Todo() {
             id: keyNum,
             text: todoInput,
             isCompleted: false,
+            date: displayDate.toLocaleDateString()
         }
 
         setTodos([...todos, newTodo]);
@@ -105,7 +106,7 @@ export default function Todo() {
             {/* 항목 리스트 */}
             <div>
                 <ul className="flex flex-col justify-center items-center">
-                    {handleFilterTods(filter).map((todo) => (
+                    {handleFilterTods(filter).filter((todo) => todo.date === displayDate.toLocaleDateString()).map((todo) => (
                         <li key={todo.id} className="bg-[#fff] border-1 border-solid border-[#497CBF] w-full px-4 py-2 rounded mb-2 flex flex-row justify-between items-center gap-[8px]">
                             <input type="checkbox" onChange={() => handleCompleteTodo(todo.id)} />
                             
