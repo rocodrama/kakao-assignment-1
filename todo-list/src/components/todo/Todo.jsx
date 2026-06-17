@@ -16,7 +16,7 @@ export default function Todo({displayDate, setDisplayDate}) {
     }, [todos]);
         
     return (
-        <div className="w-[600px]">
+        <div className="w-full px-4 sm:w-150 sm:px-0">
             {/* 입력창 */}
             <TodoInput displayDate={displayDate} setDisplayDate={setDisplayDate} todos={todos} setTodos={setTodos} />
 

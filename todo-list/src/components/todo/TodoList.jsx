@@ -37,11 +37,11 @@ export default function TodoList({displayDate, setDisplayDate, todos, setTodos, 
         <div>
             <ul className="flex flex-col justify-center items-center">
                 {handleFilterTods(filter).filter((todo) => todo.date === displayDate.toLocaleDateString()).map((todo) => (
-                    <li key={todo.id} className="bg-[#fff] border-1 border-solid border-[#497CBF] w-full px-4 py-2 rounded mb-2 flex flex-row justify-between items-center gap-[8px]">
-                        <input type="checkbox" checked={todo.isCompleted} onChange={() => handleCompleteTodo(todo.id)}  />
-                        
+                    <li key={todo.id} className="bg-white border border-solid border-primary w-full px-4 py-2 rounded mb-2 flex flex-row justify-between items-center gap-2">
+                        <input type="checkbox" checked={todo.isCompleted} onChange={() => handleCompleteTodo(todo.id)} />
+
                         { editId === todo.id ?
-                            <input className="bg-[#fff]  border-2 border-solid border-[#8FAFD9] w-[400px] px-4 py-2 rounded focus:outline-0 focus:border-[#497CBF] "
+                            <input className="bg-white border-2 border-solid border-surface-border w-full px-4 py-2 rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                                 value={editText}
                                 onChange={(e) => setEditText(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleEndEditTodo(todo.id)}
@@ -51,12 +51,12 @@ export default function TodoList({displayDate, setDisplayDate, todos, setTodos, 
                             <span className={`w-full ${todo.isCompleted ? 'line-through' : ''}`}>{todo.text}</span>
                         }
 
-                        <button className="bg-[#497CBF] text-[#fff] w-20 h-8 rounded hover:bg-[#3A5A8C]"
+                        <button className="bg-primary text-white w-20 h-8 rounded hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1"
                             onClick={ editId === todo.id ? () => handleEndEditTodo(todo.id) : () => handleStartEditTodo(todo.id)}>
                             {editId === todo.id ? '완료' : '수정'}
                         </button>
 
-                        <button className="bg-[#8FAFD9] text-[#fff] w-20 h-8 rounded hover:bg-[#3A5A8C]" onClick={() => handleDeleteTodo(todo.id)}>
+                        <button className="bg-primary-light text-white w-20 h-8 rounded hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1" onClick={() => handleDeleteTodo(todo.id)}>
                             삭제
                         </button>
                     </li>

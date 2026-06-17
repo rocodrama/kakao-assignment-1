@@ -33,14 +33,14 @@ export default function TodoInput({displayDate, setDisplayDate, todos, setTodos}
 
     return (
         <div className="flex flex-col justify-center items-center mb-4">
-            <div className="flex flex-row gap-[8px] mb-4">
-                <input className="bg-[#fff]  border-2 border-solid border-[#8FAFD9] w-[400px] px-4 py-2 rounded focus:outline-0 focus:border-[#497CBF] "
+            <div className="flex flex-row gap-2 mb-4">
+                <input className="bg-white border-2 border-solid border-surface-border w-full sm:w-100 px-4 py-2 rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                     value={todoInput}
                     onChange={handleChangeTodoInput}
                     onKeyDown={(e) => e.key === 'Enter' && handleAddTodo()}
                     placeholder="할 일을 입력하세요."/>
-                <button className="bg-[#497CBF] text-[#fff] px-4 py-2 rounded hover:bg-[#3A5A8C] disabled:bg-[#8FAFD9]"
-                onClick={handleAddTodo} 
+                <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark disabled:bg-primary-light focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1"
+                onClick={handleAddTodo}
                 disabled={isDisabled}>
                     추가
                 </button>
