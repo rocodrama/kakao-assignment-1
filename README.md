@@ -13,15 +13,6 @@ Next.js(App Router) 프론트엔드 + FastAPI 백엔드로 만든 할 일 관리
 
 프론트엔드는 조회는 Server Action(`app/actions.ts`)으로 FastAPI를 직접 호출하고, 생성/수정/삭제는 Route Handler(`app/api/todos/...`)를 거쳐 FastAPI로 전달합니다. 자세한 동작 흐름은 아래 문서들을 참고하세요.
 
-## 문서
-
-| 문서 | 내용 |
-|---|---|
-| [understand_frontend.md](./understand_frontend.md) | 프론트엔드 파일별 동작 흐름 (Server/Client Component 구분 포함) |
-| [guide_backend.md](./guide_backend.md) | 백엔드 파일별 동작 흐름 (FastAPI 요청 처리 과정) |
-| [study.md](./study.md) | SQLAlchemy/FastAPI 개념 학습 노트 |
-| [assignment3.md](./assignment3.md) | 3차 과제 설계 이유, 핵심 개념, 트러블슈팅 정리 |
-
 ## 로컬 실행
 
 ### 백엔드 (FastAPI)
