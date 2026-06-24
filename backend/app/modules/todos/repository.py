@@ -9,8 +9,20 @@ class TodoRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def get_all(self) -> list[Todo]:
-        return list(self.db.scalars(select(Todo)))
+    def get_all(
+        self,
+        date: str | None = None,
+        is_completed: bool | None = None,
+        search: str | None = None,
+    ) -> list[Todo]:
+        query = select(Todo)
+        if date is not None:
+            query = query.where(Todo.date == date)
+        if is_completed is not None:
+            query = query.where(Todo.is_completed == is_completed)
+        if search:
+            query = query.where(Todo.title.ilike(f"%{search}%"))
+        return list(self.db.scalars(query))
 
     def get_by_id(self, todo_id: int) -> Todo | None:
         return self.db.get(Todo, todo_id)

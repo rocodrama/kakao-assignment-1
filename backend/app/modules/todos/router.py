@@ -17,10 +17,19 @@ def create_todo(
 
 @router.get("/", response_model=list[TodoResponse])
 def get_todos(
+    date: str | None = None,
+    status: str | None = None,
+    search: str | None = None,
     db: Session = Depends(get_db)
 ):
+    is_completed = None
+    if status == "active":
+        is_completed = False
+    elif status == "completed":
+        is_completed = True
+
     repository = TodoRepository(db)
-    return repository.get_all()
+    return repository.get_all(date=date, is_completed=is_completed, search=search)
 
 @router.get("/{todo_id}", response_model=TodoResponse)
 def get_todo(

@@ -1,8 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from app.config import settings
+
 # DB 연결 통로
-engine = create_engine("sqlite:///app.db", echo=True) # echo=True는 SQLAlchemy가 실행하는 SQL 쿼리를 콘솔에 출력.
+engine = create_engine(settings.database_url, echo=True) # echo=True는 SQLAlchemy가 실행하는 SQL 쿼리를 콘솔에 출력.
 
 # 세션 생성 
 SessionLocal = sessionmaker(bind=engine) 
